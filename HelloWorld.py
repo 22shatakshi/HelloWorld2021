@@ -62,6 +62,7 @@ def analyse_tweets(user_id, number_of_tweets = 1):
         print()
         print()
 
+#averages the polarity and the subjectivity of the tweets
 def average_vibes(user_id, num):
     sumPolarity = 0
     sumSubjectivity = 0
