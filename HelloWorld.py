@@ -24,9 +24,9 @@ def SentimentAnalysis(userInput):
     elif blob.sentiment.polarity<0:
         print("Slightly Negative")
     elif blob.sentiment.polarity==0:
-        print("Netural")
+        print("Neutral")
     elif blob.sentiment.polarity<.25:
-        print("Slight Positive")
+        print("Slightly Positive")
     elif blob.sentiment.polarity<.75:
         print("Moderately Positive")
     else:
@@ -49,6 +49,11 @@ def SentimentAnalysis(userInput):
         print("Extremely Subjective")
     print("Subjectivity is ", blob.sentiment.subjectivity)
 
+def mainMenu():
+    print("1. Type in texts")
+    print("2. Pull from Twitter")
+    print("3. Exit")
+
 
 #pulls input from twitter by using the twitter username and calls the sentiment 
 # analysis function to do sentiment analysis function on the tweets
@@ -62,17 +67,16 @@ def analyse_tweets(user_id, number_of_tweets = 1):
         print()
         print()
 
-#averages the polarity and the subjectivity of the tweets
 def average_vibes(user_id, num):
-    sumPolarity = 0
-    sumSubjectivity = 0
+    sumPolarity = 0.0
+    sumSubjectivity = 0.0
     tweets = api.user_timeline(user_id, count = num)
     for tweet in tweets:
-        text = tweet.text
+        text = TextBlob(tweet.text)
         sumPolarity += float(text.sentiment.polarity)
         sumSubjectivity += float(text.sentiment.subjectivity)
-    avgPolarity = sumPolarity/num
-    avgSubjecticity = sumSubjectivity/num
+    avgPolarity = float(sumPolarity)/float(num)
+    avgSubjecticity = float(sumSubjectivity)/float(num)
     print("The average polarity is ", avgPolarity)
     if avgPolarity<-.75:
         print("Extremely Negative")
@@ -81,9 +85,9 @@ def average_vibes(user_id, num):
     elif avgPolarity<0:
         print("Slightly Negative")
     elif avgPolarity==0:
-        print("Netural")
+        print("Neutral")
     elif avgPolarity<.25:
-        print("Slight Positive")
+        print("Slightly Positive")
     elif avgPolarity<.75:
         print("Moderately Positive")
     else:
@@ -115,10 +119,10 @@ def mainMenu():
 loop = True
 while loop:
     mainMenu()
-    option = input("Please Enter your option \n")
+    option = input("Please Enter your option: \n")
     if option == "1":
         print("Option 1 selected")
-        userInput = input("Please Enter your text. \n")
+        userInput = input("Please Enter your text: \n")
         SentimentAnalysis(userInput)
 
     elif option == "2":
@@ -126,7 +130,7 @@ while loop:
         uid = input("Enter username: ")
         tweetcount = input("How many tweets do you want to analyse? ")
         analyse_tweets(uid,tweetcount)
-        choice = input("Do you want your average polarity and subjectivity feeback? Enter yes or no")
+        choice = input("Do you want your average polarity and subjectivity feeback? Enter yes or no: \n")
         if choice == "yes":
             average_vibes(uid, tweetcount)
         else:
