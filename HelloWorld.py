@@ -49,6 +49,12 @@ def SentimentAnalysis(userInput):
         print("Extremely Subjective")
     print("Subjectivity is ", blob.sentiment.subjectivity)
 
+def mainMenu():
+    print("1. Type in texts")
+    print("2. Pull from Twitter")
+    print("3. Exit")
+
+
 #pulls input from twitter by using the twitter username and calls the sentiment 
 # analysis function to do sentiment analysis function on the tweets
 def analyse_tweets(user_id, number_of_tweets = 1):
@@ -95,6 +101,3 @@ while loop:
         print
         print("Invalid option selected. Don't you know how to type? What an idiot.")
         print("Choose again.")
-
-
-
