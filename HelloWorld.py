@@ -1,5 +1,6 @@
 import tweepy
 from textblob import TextBlob
+import matplotlib.pyplot as plt
 
 #token for accessing the twitter app
 api_key = "s7gzvY6EVbtA2fK6HDJDtaheg"
@@ -49,6 +50,11 @@ def SentimentAnalysis(userInput):
         print("Extremely Subjective")
     print("Subjectivity is ", blob.sentiment.subjectivity)
 
+def mainMenu():
+    print("1. Type in texts")
+    print("2. Pull from Twitter")
+    print("3. Exit")
+
 
 #pulls input from twitter by using the twitter username and calls the sentiment 
 # analysis function to do sentiment analysis function on the tweets
@@ -62,7 +68,6 @@ def analyse_tweets(user_id, number_of_tweets = 1):
         print()
         print()
 
-#averages the polarity and subjectivity from the tweets pulled by the system
 def average_vibes(user_id, num):
     sumPolarity = 0.0
     sumSubjectivity = 0.0
@@ -111,6 +116,21 @@ def mainMenu():
     print("2. Pull from Twitter")
     print("3. Exit")
 
+def plot2(user_id, num):
+    ypoints = []
+    xpoints = []
+    tweets = api.user_timeline(user_id, count = num)
+    for tweet in tweets:
+        text = TextBlob(tweet.text)
+        ypoints.append(float(text.sentiment.polarity))
+        xpoints.append(float(text.sentiment.subjectivity))
+    plt.plot(xpoints, ypoints, "o")
+
+    plt.ylabel('polarity')
+    plt.xlabel('subjectivity')
+
+    plt.show()
+
 #menu loop which gives the options and calls the function
 loop = True
 while loop:
@@ -131,6 +151,9 @@ while loop:
             average_vibes(uid, tweetcount)
         else:
             print("Thank you!")
+        
+        
+        plot2(uid, tweetcount);
         
 
     elif option == "3":
