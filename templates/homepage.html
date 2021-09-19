@@ -7,29 +7,47 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>   
     </head>
     
-    <body> 
-        <div class = "container ">
-            <h1>wHAt ArE thE VIbeS</h1>
-            <p>Welcome to wHAt ArE thE VIbeS, where we can analyze your messages before you send or post them as well as allow you to 
-            dive into the data of of your favorite twitter user and the vibes that they tweet with. Do you want to know if a message you
-            that you post is more positive or negative? If so, type your message in the text box on the left! If you want to take a look at 
-            your favorite twitter user, type their name in the box on the right.</p>
-         </div>
-        <div class = "row">
-            <div class = "container col s5 card-panel input-field">
-                <form action = "{{ url_for('print_message_analysis') }}" method = "post">
-                    <input type = "text" name = "textInput" placeholder = "Insert message to analyze here">
-                    <input class = "btn-large" type = "submit">
-                </form>
-                <p>{{text_input}}</p>
+    <body class = "grey darken-4 teal-text text-lighten-1"> 
+        <div>
+            <div class = "card-panel grey darken-4 z-depth-5">
+                <img src = "vibecheckLogo.png" style = "width: 500 px;">
             </div>
-            <div class = "container col s5 card-panel input-field">
-                <form action = "{{ url_for('print_twitter_analysis') }}" method = "post">
-                    <input type = "text" name = "tweeterInput" placeholder = "Put the handle of your fave twitter user">
-                    <input type = "text" name = "numTweets" placeholder = "How many of their tweets do you want to analyze" >
-                    <input class = "btn-large" type = "submit">
-                </form>
-                <p>{{twitter_output}}</p>
+            <h5 class = "center container  white-text">Welcome to VIBECHECK</h6>
+            <h6 class = "center container white-text">where we can analyze your messages before you send or post them as well as allow you to 
+            dive into the data of of your favorite twitter user and the vibes that they tweet with.</h6>
+        </div>
+        <div class = "container divider" style = "margin-top:20px"></div>
+        <div class = "row container">
+            <div class = "col l6">
+                <p class = "white-text center">Do you want to know if a message that you post is more positive or negative? If so, type your message in the text box below!</p>
+                <div class = "card-panel input-field center">
+                    <form action = "{{ url_for('print_message_analysis') }}" method = "post">
+                        <input type = "text" name = "textInput" placeholder = "Insert message to analyze here">
+                        <input class = "btn-large" type = "submit" style = "margin-top:20px">
+                    </form>
+                    
+                </div>
+                
+                <h6 class = "white-text">{{text_input[0]}}</h6>
+                <p  class = "white-text">{{text_input[1]}}</p>
+                <h6 class = "white-text">{{text_input[2]}}</h6>
+                <p class = "white-text">{{text_input[3]}}</p>
+                
+            </div>
+            <div class = "col l6">
+                <p class = "white-text center">If you want to take a look at your favorite twitter user, type their name in the box on the right along with the number of their tweets which you would like to analyze.</p>
+                <div class = "card-panel input-field center">
+                    <form action = "{{ url_for('print_twitter_analysis') }}" method = "post">
+                        <input type = "text" name = "tweeterInput" placeholder = "Put the handle of your fave twitter user">
+                        <input type = "text" name = "numTweets" placeholder = "How many of their tweets do you want to analyze" >
+                        <input class = "btn-large" type = "submit"  style = "margin-top:20px">
+                    </form>
+                    
+                </div>
+                <h6 class = "white-text">{{twitter_output[0]}}</h6>
+                <p  class = "white-text">{{twitter_output[1]}}</p>
+                <h6 class = "white-text">{{twitter_output[2]}}</h6>
+                <p class = "white-text">{{twitter_output[3]}}</p>
             </div>
         </div>
         
@@ -40,4 +58,3 @@
 
 
 </html>
-
