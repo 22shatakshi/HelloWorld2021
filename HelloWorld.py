@@ -71,7 +71,7 @@ def average_vibes(user_id, num):
     sumSubjectivity = 0
     tweets = api.user_timeline(user_id, count = num)
     for tweet in tweets:
-        text = TextBlob.tweet.text
+        text = TextBlob(tweet.text) #() instead of .
         sumPolarity += float(text.sentiment.polarity)
         sumSubjectivity += float(text.sentiment.subjectivity)
     avgPolarity = float(sumPolarity)/float(num)
