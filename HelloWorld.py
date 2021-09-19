@@ -1,6 +1,5 @@
 import tweepy
 from textblob import TextBlob
-
 import matplotlib.pyplot as plt
 
 #token for accessing the twitter app
@@ -50,7 +49,6 @@ def SentimentAnalysis(userInput):
     else:
         print("Extremely Subjective")
     print("Subjectivity is ", blob.sentiment.subjectivity)
-
 
 #pulls input from twitter by using the twitter username and calls the sentiment 
 # analysis function to do sentiment analysis function on the tweets
@@ -107,21 +105,19 @@ def average_vibes(user_id, num):
     else:
         print("Extremely Subjective")
 
+#Plot tweets pulled polarity and subjectivity on a graph 
 def plot2(user_id, num):
     ypoints = []
     xpoints = []
     tweets = api.user_timeline(user_id, count = num)
     for tweet in tweets:
         text = TextBlob(tweet.text)
-
-
         xpoints.append(float(text.sentiment.polarity))
         ypoints.append(float(text.sentiment.subjectivity))
     plt.plot(xpoints, ypoints, "o")
-
     plt.ylabel('subjectivity')
     plt.xlabel('polarity')
-
+    plt.savefig("plot2.jpg")
     plt.show()
 
 #main menu
@@ -149,6 +145,7 @@ while loop:
         plt.plot(p, s, 'o')
         plt.xlabel('polarity')
         plt.ylabel('subjectivity')
+        plt.savefig("plot1.jpg")
         plt.show()
         nextOption = input("Would you like to enter another text? Enter yes or no: \n")
         while nextOption == "yes":
@@ -159,6 +156,7 @@ while loop:
             plt.plot(p, s, 'o')
             plt.xlabel('polarity')
             plt.ylabel('subjectivity')
+            plt.savefig("plot1.jpg")
             plt.show()
             nextOption = input("Would you like to enter another text? Enter yes or no: \n")
         print("Thank you!")
