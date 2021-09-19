@@ -2,12 +2,6 @@
 # py -m flask run
 # https://flask.palletsprojects.com/en/2.0.x/quickstart/#rendering-templates
 
-#for macs
-# . venv/bin/activate
-# cd Desktop/HelloWorld
-# export FLASK_APP=runFlask
-# flask run
-
 import tweepy
 from textblob import TextBlob
 from flask import Flask, render_template, request
@@ -26,7 +20,7 @@ auth.set_access_token(access_key, access_secret)
 api = tweepy.API(auth)
 
 # Makes the web app
-app = Flask(__name__)
+app = Flask(__name__) #, static_folder="C:\\Users\\mmalh\\\'Hello World\'\\Templates"
 
 @app.route("/")
 def hello_world():
@@ -139,3 +133,6 @@ def average_vibes(user_id, num):
         ret_str += "Extremely Subjective"
     ret_str += "Subjectivity is " + str(avgSubjecticity)
     return ret_str
+
+
+    
