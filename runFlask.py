@@ -2,6 +2,12 @@
 # py -m flask run
 # https://flask.palletsprojects.com/en/2.0.x/quickstart/#rendering-templates
 
+#for macs
+# . venv/bin/activate
+# cd Desktop/HelloWorld
+# export FLASK_APP=runFlask
+# flask run
+
 import tweepy
 from textblob import TextBlob
 from flask import Flask, render_template, request
