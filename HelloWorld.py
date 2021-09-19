@@ -1,6 +1,8 @@
 import tweepy
 from textblob import TextBlob
 
+import matplotlib.pyplot as plt
+
 #token for accessing the twitter app
 api_key = "s7gzvY6EVbtA2fK6HDJDtaheg"
 api_secret = "Cgcu9qjnPL1vfD7UZIX9985zcUs4fYVYyFkeaPCEr0Ccnh4g0i"
@@ -62,13 +64,14 @@ def analyse_tweets(user_id, number_of_tweets = 1):
         print()
         print()
 
-#averages the polarity and subjectivity from the tweets pulled by the system
+#calculates the average polarity and subjectivity 
+# over a certain num of tweets of a certain twitter user
 def average_vibes(user_id, num):
-    sumPolarity = 0.0
-    sumSubjectivity = 0.0
+    sumPolarity = 0
+    sumSubjectivity = 0
     tweets = api.user_timeline(user_id, count = num)
     for tweet in tweets:
-        text = TextBlob(tweet.text)
+        text = TextBlob.tweet.text
         sumPolarity += float(text.sentiment.polarity)
         sumSubjectivity += float(text.sentiment.subjectivity)
     avgPolarity = float(sumPolarity)/float(num)
@@ -105,6 +108,7 @@ def average_vibes(user_id, num):
         print("Extremely Subjective")
 
 
+
 #main menu
 def mainMenu():
     print("1. Type in texts")
@@ -113,13 +117,37 @@ def mainMenu():
 
 #menu loop which gives the options and calls the function
 loop = True
+
 while loop:
+
     mainMenu()
-    option = input("Please Enter your option: \n")
+    option = input("Please Enter your option \n")
+
     if option == "1":
         print("Option 1 selected")
-        userInput = input("Please Enter your text: \n")
+        userInput = input("Please Enter your text. \n")
         SentimentAnalysis(userInput)
+        p = []
+        s = []
+        p.append(float(TextBlob(userInput).sentiment.polarity))
+        s.append(float(TextBlob(userInput).sentiment.subjectivity))
+        plt.plot(p, s, 'o')
+        plt.xlabel('polarity')
+        plt.ylabel('subjectivity')
+        plt.show()
+        nextOption = input("Would you like to enter another text? Enter yes or no: \n")
+        while nextOption == "yes":
+            nextInput = input("Please enter your text: \n")
+            SentimentAnalysis(nextInput)
+            p.append(float(TextBlob(nextInput).sentiment.polarity))
+            s.append(float(TextBlob(nextInput).sentiment.subjectivity))
+            plt.plot(p, s, 'o')
+            plt.xlabel('polarity')
+            plt.ylabel('subjectivity')
+            plt.show()
+            nextOption = input("Would you like to enter another text? Enter yes or no: \n")
+        print("Thank you!")
+                    
 
     elif option == "2":
         print("Option 2 selcted")
@@ -135,7 +163,7 @@ while loop:
 
     elif option == "3":
         print("Option 3 selected")
-        confirmation = input("Are you sure you want to exit? Enter yes or no: ")
+        confirmation = input("Are you sure you want to exit? Enter yes or no: \n")
         if confirmation.lower() == "yes":
             loop = False
         elif confirmation.lower() == "no":
@@ -145,3 +173,7 @@ while loop:
         print
         print("Invalid option selected. Stop fat fingering")
         print("Choose again.")
+ 
+   
+
+    
