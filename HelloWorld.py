@@ -122,12 +122,14 @@ def plot2(user_id, num):
     tweets = api.user_timeline(user_id, count = num)
     for tweet in tweets:
         text = TextBlob(tweet.text)
-        ypoints.append(float(text.sentiment.polarity))
-        xpoints.append(float(text.sentiment.subjectivity))
+
+
+        xpoints.append(float(text.sentiment.polarity))
+        ypoints.append(float(text.sentiment.subjectivity))
     plt.plot(xpoints, ypoints, "o")
 
-    plt.ylabel('polarity')
-    plt.xlabel('subjectivity')
+    plt.ylabel('subjectivity')
+    plt.xlabel('polarity')
 
     plt.show()
 
