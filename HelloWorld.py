@@ -107,7 +107,22 @@ def average_vibes(user_id, num):
     else:
         print("Extremely Subjective")
 
+def plot2(user_id, num):
+    ypoints = []
+    xpoints = []
+    tweets = api.user_timeline(user_id, count = num)
+    for tweet in tweets:
+        text = TextBlob(tweet.text)
 
+
+        xpoints.append(float(text.sentiment.polarity))
+        ypoints.append(float(text.sentiment.subjectivity))
+    plt.plot(xpoints, ypoints, "o")
+
+    plt.ylabel('subjectivity')
+    plt.xlabel('polarity')
+
+    plt.show()
 
 #main menu
 def mainMenu():
@@ -159,7 +174,8 @@ while loop:
             average_vibes(uid, tweetcount)
         else:
             print("Thank you!")
-        
+            
+        plot2(uid, tweetcount);
 
     elif option == "3":
         print("Option 3 selected")
