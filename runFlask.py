@@ -8,11 +8,11 @@ from flask import Flask, render_template, request
 import templates
 
 #token for accessing the twitter app
-api_key = "s7gzvY6EVbtA2fK6HDJDtaheg"
-api_secret = "Cgcu9qjnPL1vfD7UZIX9985zcUs4fYVYyFkeaPCEr0Ccnh4g0i"
-bearer_token = "AAAAAAAAAAAAAAAAAAAAAKVTTwEAAAAA5Lj8slDEMmF0LJugoRX1cYvWgrg%3DVYLHYYcMmU2WMrnpIp3UuuhbimgmtICe4Y4bm78j0Xt6arCpsk"
-access_key = "1392019419476348930-e3Gn4O0FepIu2kwHIbxE21AtNdsDxP"
-access_secret =  "MRkJcAGBjpqFiyJ5Fuyae9Ly2kDE1OmgApBW3OgBsyNj3"
+api_key = "API-key"
+api_secret = "API-Secret"
+bearer_token = "Bearer token"
+access_key = "access-key"
+access_secret =  "access secret"
 
 #authenticataion for accessing twitter
 auth = tweepy.OAuthHandler(api_key, api_secret)
